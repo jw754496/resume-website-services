@@ -4,8 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node --files ./src/server.ts"
+    "prestart": "npm run compile",
+    "start": "npm run watch & npm run dev",
+    "compile": "tsc -p tsconfig.json --outDir dist",
+    "watch": "tsc -p tsconfig.json --outDir dist --watch",
+    "dev": "nodemon ./dist/src/server.js",
+    "test": "npx jest",
+    "test:dev": "npx tap -O -T"
   },
   "repository": {
     "type": "git",
@@ -19,6 +24,7 @@
   },
   "homepage": "https://github.com/jw754496/resume-website-services#readme",
   "dependencies": {
+    "@types/dotenv": "^6.1.1",
     "@types/node": "^12.11.1",
     "dotenv": "^8.2.0",
     "fastify": "^2.10.0",
